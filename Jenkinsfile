@@ -7,10 +7,15 @@ pipeline {
     stages{
         stage('build project'){
             steps{
-                git 'https://github.com/MeHuman333/ci-cd-Cpro.git'
-                sh 'mvn clean package'
-              
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/MeHuman333/ci-cd-Cpro.git']])           
             }
+        }
+        stage('Build Maven'){
+            steps{
+		script{
+                sh 'mvn clean install'
+            	}
+	        }
         }
         stage('Building  docker image'){
             steps{
