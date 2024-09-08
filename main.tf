@@ -27,7 +27,7 @@ resource "aws_security_group" "allow_ssh" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["<your_IP>/32"]  # Replace with your actual IP address
+    cidr_blocks = [" 54.237.91.252 /32"]  # Replace with your actual IP address
   }
 
   egress {
@@ -47,7 +47,7 @@ resource "aws_instance" "server" {
   ami           = "ami-0522ab6e1ddcc7055"
   instance_type = var.instance_type
   key_name      = "Sai"
-  vpc_security_group_ids = [aws_security_group.allow_ssh.id]  # Attach the security group
+  vpc_security_group_ids = ["sg-0ee21589c6e2904ad"]  # Attach the security group
 
   tags = {
     Name = "${terraform.workspace}_server"
